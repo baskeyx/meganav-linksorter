@@ -1,3 +1,43 @@
 body {
 
+    &:after {
+        content:'Link Sorting On!';
+        position: fixed;
+        bottom:-20px;
+        right:20px;
+        font-family: sans-serif;
+        color: white;
+        background: #222;
+        border-radius:20px;
+        padding:10px 15px;
+        font-size:11px;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        opacity: 0;
+        font-weight: normal;
+        letter-spacing: 1px;
+
+        @keyframes popUp {
+            0% {
+                bottom:-20px;
+                opacity: 0;
+            }
+
+            6% {
+                bottom:20px;
+                opacity: 1;
+            }
+
+            94% {
+                bottom:20px;
+                opacity: 1;
+            }
+
+            100% {
+                bottom:-20px;
+                opacity: 0;
+            }
+        }
+
+        animation: popUp 3s ease-in-out;
+    }
 }

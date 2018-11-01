@@ -40,27 +40,27 @@ window.linkSorter = (function(){
         (window.bookmarklet = function(){
             console.log('Meganav Link Sorting Helper initiliased...')
 
+            function onDrop() {
+                console.log('Dropped')
+                var targetTable = $('.row-fluid.editable.active-el form table tbody');
+                var rows = targetTable.find('tr')
+                rows.each(function(i){
+                    var el = $(this);
+                    var html = el.html();
+                    // update html
+                    html = html.replace(/Content_.*?_/g,'Content_'+i+'_');
+                    html = html.replace(/Content\[.*?\]/g,'Content['+i+']');
+                    el.html(html)
+                    // set order hidden input values
+                    var order = el.find('td').first().find('input.text-box').prev();
+                    if (order.length){
+                        order.val(i+1);
+                    }
+                })
+            }
+
             $('.module-preview .baseline').live('click',function(e){
                 var targetTable = $('.row-fluid.editable.active-el form table tbody');
-
-                function onDrop() {
-                    console.log('Dropped')
-                    var rows = targetTable.find('tr')
-                    rows.each(function(i){
-                        var el = $(this);
-                        var html = el.html();
-                        // update html
-                        html = html.replace(/Content_.*?_/g,'Content_'+i+'_');
-                        html = html.replace(/Content\[.*?\]/g,'Content['+i+']');
-                        el.html(html)
-                        // set order hidden input values
-                        var order = el.find('td').first().find('input.text-box').prev();
-                        if (order.length){
-                            order.val(i+1);
-                        }
-                    })
-                }
-
                 targetTable.sortable({
                     axis: 'y',
                     items: 'tr',
@@ -69,6 +69,20 @@ window.linkSorter = (function(){
                         onDrop()
                     }
                 })
+            })
+
+            $('input[type=submit]').live('click', function(){
+                setTimeout(function(){
+                    var targetTable = $('.row-fluid.editable.active-el form table tbody');
+                    targetTable.sortable({
+                        axis: 'y',
+                        items: 'tr',
+                        cursor: 'move',
+                        update: function(item) {
+                            onDrop()
+                        }
+                    })
+                },2000)
             })
 
         })()
