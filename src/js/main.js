@@ -41,7 +41,6 @@ window.linkSorter = (function(){
             console.log('Meganav Link Sorting Helper initiliased...')
 
             $('.module-preview .baseline').live('click',function(e){
-                var el = $(this);
                 var targetTable = $('.row-fluid.editable.active-el form table tbody');
 
                 function onDrop() {
