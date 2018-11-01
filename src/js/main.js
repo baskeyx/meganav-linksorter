@@ -64,6 +64,7 @@ window.linkSorter = (function(){
                 targetTable.sortable({
                     axis: 'y',
                     items: 'tr',
+                    cursor: 'move',
                     update: function(item) {
                         onDrop()
                     }
