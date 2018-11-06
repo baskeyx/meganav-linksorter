@@ -94,7 +94,7 @@ gulp.task('html-dist', function(done){
   feedPath = '';
   var translations = JSON.parse(fs.readFileSync('./src/_data/translations.json'));
   translations.forEach(function(item){
-    return gulp.src(['./src/html/*.pug'])
+    return gulp.src(['./src/*.pug'])
         .pipe(data(function(file) {
             return item
         }))
